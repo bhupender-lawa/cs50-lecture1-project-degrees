@@ -139,7 +139,16 @@ def shortest_path(source, target):
         # here action stands for movie and state stands for person
         for action, state in all_actions:
             # checking if this state/person is in frontier or not, or not in explored set. If not then we can add it in frontier
-            if state not in explored and not frontier.contains_state(state):
+            if state == goal_state:
+                goal_node = Node(state=state, parent=removed_node, action=action)
+                steps = []
+                while goal_node.parent is not None:
+                    steps.append((goal_node.action, goal_node.state))
+                    goal_node = goal_node.parent
+                steps.reverse()
+                print(f"so it takes ::: {len(steps)} ::: to reach {target}")
+                return steps
+            elif state not in explored and not frontier.contains_state(state):
                 child = Node(state=state, parent=removed_node, action=action)
                 frontier.add(child)
 

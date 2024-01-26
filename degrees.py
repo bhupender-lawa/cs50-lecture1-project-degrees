@@ -111,7 +111,7 @@ def shortest_path(source, target):
     # loop to find the target person
     while True:
         if frontier.empty():
-            raise Exception("No match found")
+            return None
         
         # removing a node for inspection or say search
         removed_node = frontier.remove()
@@ -124,7 +124,7 @@ def shortest_path(source, target):
                 steps.append((removed_node.action, removed_node.state))
                 removed_node = removed_node.parent
             steps.reverse()
-            print(f"so it takes ::: {len(steps)} ::: to reach {target}")
+            # print(f"so it takes ::: {len(steps)} ::: to reach {target}")
             return steps
 
         
@@ -146,7 +146,7 @@ def shortest_path(source, target):
                     steps.append((goal_node.action, goal_node.state))
                     goal_node = goal_node.parent
                 steps.reverse()
-                print(f"so it takes ::: {len(steps)} ::: to reach {target}")
+                # print(f"so it takes ::: {len(steps)} ::: to reach {target}")
                 return steps
             elif state not in explored and not frontier.contains_state(state):
                 child = Node(state=state, parent=removed_node, action=action)
